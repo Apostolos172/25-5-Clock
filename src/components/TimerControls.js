@@ -10,7 +10,7 @@ const TimerControls = (props) => {
         <FontAwesomeIcon icon={faPlay} />
         {/* <i class="fa-solid fa-play"></i> */}
       </button>
-      <button id="reset">
+      <button id="reset" onClick={props.resetPressed}>
         <FontAwesomeIcon icon={faArrowsRotate} />
       </button>
     </div>

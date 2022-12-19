@@ -1,16 +1,29 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
-// import logo from './logo.svg';
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import TimeIntervalControls from "./components/TimeIntervalControls";
 import Timer from "./components/Timer";
 import "./css/style.css";
+import { minToSec } from "./util.js";
+
+//let intervalOfTimeLeft;
 
 function App() {
+
+  const initialStateBreakLengthControl = 5;
+  const [stateBreakLengthControl, setStateBreakLengthControl] = useState(
+    initialStateBreakLengthControl
+  );
+  const initialStateSessionLengthControl = 25;
+  const [stateSessionLengthControl, setStateSessionLengthControl] = useState(
+    initialStateSessionLengthControl
+  );
+
   const initialTimerState = {
     label: "Session",
     // value: "25:00",
-    value: 25,
+    //value: minToSec(1),
+    value: minToSec(25),
   };
   const [timerState, setTimerState] = useState(initialTimerState);
   const [startStopButtonPressedState, setStartStopButtonPressedState] =
@@ -21,28 +34,50 @@ function App() {
   //   setTimeout(test, 1000);
   // };
 
-  const updateState = () => {
+  const updateState = useCallback(() => {
     setTimerState((timerState) => {
       // console.log(timerState.value);
       let newValue = timerState.value - 1;
       if (newValue < 0 && timerState.label === "Session") {
         // τέλειωσε το session, ξεκίνα διάλλειμμα
-        let breakLength = document.getElementById("break-length").innerHTML;
-        return { label: "Break", value: breakLength };
+        //let breakLength = document.getElementById("break-length").innerHTML;
+        let breakLength = stateBreakLengthControl;
+        console.log(document.getElementById("beep"));
+        document.getElementById("beep").play();
+        return { label: "Break", value: minToSec(breakLength) };
       } else if (newValue < 0 && timerState.label === "Break") {
         // τέλειωσε το διάλλειμμα, ξεκίνα το session
-        let sessionLength = document.getElementById("session-length").innerHTML;
-        return { label: "Session", value: sessionLength };
+        //let sessionLength = document.getElementById("session-length").innerHTML;
+        let sessionLength = stateSessionLengthControl;
+        document.getElementById("beep").play();
+        return { label: "Session", value: minToSec(sessionLength) };
       }
       return { ...timerState, value: newValue };
     });
-    console.log("setTimeout" + startStopButtonPressedState)
-    if(startStopButtonPressedState==="Stop") {
-      //setTimeout(updateState, 1000);
-      // setInterval()
+  }, [stateBreakLengthControl, stateSessionLengthControl]);
+
+  useEffect(() => {
+    let intervalOfTimeLeft;
+    if (startStopButtonPressedState === "Start") {
+      intervalOfTimeLeft = setInterval(updateState, 1000);
     } else {
-      // do nothing
+      clearInterval(intervalOfTimeLeft);
     }
+    return () => clearInterval(intervalOfTimeLeft);
+  }, [startStopButtonPressedState, updateState]);
+
+  const resetPressed = (event) => {
+    //console.log(event.currentTarget);
+    setTimerState(initialTimerState);
+    //document.getElementById("break-length").innerHTML = "5";
+    //document.getElementById("session-length").innerHTML = "25";
+    setStateBreakLengthControl(5);
+    setStateSessionLengthControl(25);
+    let audio = document.getElementById("beep");
+    //console.log(audio);
+    //audio.pause();
+    audio.currentTime = 0;
+    //audio.stop();
   };
 
   const startStopButtonPressed = (event) => {
@@ -55,36 +90,23 @@ function App() {
       }
       return "Stop";
     });
-    // if(startStopButtonPressedState==="Stop") {
-      //setTimeout(updateState, 1000);
-      setInterval(updateState, 1000);
-    // }
-    
   };
 
   return (
     <div className="App container">
-      <h1 style={{'color':"blue"}}>25 + 5 Clock</h1>
-      <TimeIntervalControls></TimeIntervalControls>
+      <h1 style={{ color: "blue" }}>25 + 5 Clock</h1>
+      <TimeIntervalControls
+        setStateBreakLengthControl={setStateBreakLengthControl}
+        setStateSessionLengthControl={setStateSessionLengthControl}
+        stateBreakLengthControl={stateBreakLengthControl}
+        stateSessionLengthControl={stateSessionLengthControl}
+      ></TimeIntervalControls>
       <Timer
         labelState={timerState.label}
         timeLeft={timerState.value}
         startStopButtonPressed={startStopButtonPressed}
+        resetPressed={resetPressed}
       ></Timer>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
     </div>
   );
 }

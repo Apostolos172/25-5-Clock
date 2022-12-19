@@ -9,7 +9,10 @@ const Timer = (props) => {
         labelState={props.labelState}
         timeLeft={props.timeLeft}
       ></Counter>
-      <TimerControls startStopButtonPressed={props.startStopButtonPressed}/>
+      <TimerControls
+        startStopButtonPressed={props.startStopButtonPressed}
+        resetPressed={props.resetPressed}
+      />
     </div>
   );
 };

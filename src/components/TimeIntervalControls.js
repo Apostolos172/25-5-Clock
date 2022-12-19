@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PeriodOfTime from "./PeriodOfTime";
 
 const breakLengthControl = {
@@ -16,12 +16,6 @@ const sessionLengthControl = {
 };
 
 const TimeIntervalControls = (props) => {
-  const initialStateBreakLengthControl = 5;
-  const [stateBreakLengthControl, setStateBreakLengthControl] = useState(initialStateBreakLengthControl);
-  const initialStateSessionLengthControl = 25;
-  const [stateSessionLengthControl, setStateSessionLengthControl] =
-    useState(initialStateSessionLengthControl);
-
   const passedValue = (value, previousvalue) => {
     // check the limits of break and session lengths
     if (value > 60 || value <= 0) {
@@ -39,30 +33,30 @@ const TimeIntervalControls = (props) => {
     // έχεις το id, με ένα switch αλλάζεις κατάλληλο state καταλλήλως και θα πάει να το αλλάξει
     switch (event.currentTarget.id) {
       case "break-decrement":
-        setStateBreakLengthControl((previousState) => {
+        props.setStateBreakLengthControl((previousState) => {
           return passedValue(previousState - 1, previousState);
         });
         break;
       case "break-increment":
-        setStateBreakLengthControl((previousState) => {
+        props.setStateBreakLengthControl((previousState) => {
           return passedValue(previousState + 1, previousState);
         });
         break;
       case "session-decrement":
-        setStateSessionLengthControl((previousState) => {
+        props.setStateSessionLengthControl((previousState) => {
           return passedValue(previousState - 1, previousState);
         });
         break;
       case "session-increment":
-        setStateSessionLengthControl((previousState) => {
+        props.setStateSessionLengthControl((previousState) => {
           return passedValue(previousState + 1, previousState);
         });
         break;
       default:
-        setStateSessionLengthControl((previousState) => {
+        props.setStateSessionLengthControl((previousState) => {
           return previousState;
         });
-        setStateBreakLengthControl((previousState) => {
+        props.setStateBreakLengthControl((previousState) => {
           return previousState;
         });
     }
@@ -75,13 +69,13 @@ const TimeIntervalControls = (props) => {
     <div className="timeIntervalControls row">
       <PeriodOfTime
         onclick={increaseDecresePressed}
-        state={stateBreakLengthControl}
+        state={props.stateBreakLengthControl}
         elementsIds={breakLengthControl}
         col="col-sm-6"
       ></PeriodOfTime>
       <PeriodOfTime
         onclick={increaseDecresePressed}
-        state={stateSessionLengthControl}
+        state={props.stateSessionLengthControl}
         elementsIds={sessionLengthControl}
         col="col-sm-6"
       ></PeriodOfTime>
