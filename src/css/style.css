@@ -1,0 +1,63 @@
+html {
+  background-color: beige;
+  padding: 10px;
+}
+html body {
+  background-color: beige;
+}
+html body #root .container {
+  background-color: beige;
+  width: 80%;
+  width: 500px;
+  padding-top: 50px;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: orange 5px auto;
+}
+
+.timeIntervalControls {
+  background-color: inherit;
+}
+.timeIntervalControls .period-of-time div * {
+  padding: 0;
+}
+.timeIntervalControls div div button:first-child {
+  text-align: right;
+}
+.timeIntervalControls div div button:last-child {
+  text-align: left;
+}
+
+.timer .counterWithLabel {
+  border: 3px solid black;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.timer .timer-controls {
+  margin: auto;
+  text-align: center;
+}
+.timer .timer-controls button {
+  padding: 0px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+.timer .timer-controls button:first-child {
+  margin-right: 10px;
+  text-align: right;
+}
+.timer .timer-controls button:last-child {
+  margin-left: 10px;
+  text-align: left;
+}/*# sourceMappingURL=style.css.map */

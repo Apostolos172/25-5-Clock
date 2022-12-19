@@ -1,0 +1,33 @@
+html {
+  background-color: beige;
+  padding: 10px;
+
+  body {
+    background-color: beige;
+
+    #root {
+      .container {
+        background-color: beige;
+        width: 80%;
+        width: 500px;
+        padding-top: 50px;
+      }
+    }
+  }
+}
+
+// button {
+//   border: none;
+// }
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: orange 5px auto;
+}
+
+@import "./timeIntervalControls";
+@import "./timer";

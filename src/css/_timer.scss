@@ -1,0 +1,32 @@
+.timer {
+  .counterWithLabel {
+    border: 3px solid black;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    span {
+    }
+  }
+
+  .timer-controls {
+    margin: auto;
+    text-align: center;
+
+    button {
+      padding: 0px;
+      width: fit-content;
+      margin: auto;
+    }
+    button:first-child {
+      margin-right: 10px;
+      text-align: right;
+    }
+    button:last-child {
+      margin-left: 10px;
+      text-align: left;
+    }
+  }
+}
