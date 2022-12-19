@@ -1,15 +1,30 @@
 html {
-  background-color: beige;
+  background-color: rgb(195, 177, 147);
   padding: 10px;
 }
 html body {
-  background-color: beige;
+  background-color: rgb(195, 177, 147);
+  text-align: center;
+}
+html body #root {
+  padding: 50px;
 }
 html body #root .container {
   background-color: beige;
   width: 80%;
   width: 500px;
   padding-top: 50px;
+  padding-bottom: 30px;
+  border: 13px double brown;
+  border-radius: 50%;
+}
+html body #root .container h1 {
+  padding-bottom: 20px;
+}
+html body #root .container .counterWithLabel {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 button {
@@ -21,8 +36,24 @@ button:focus {
   outline: orange 5px auto;
 }
 
+@media screen and (max-width: 600px) {
+  html body #root .container {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 450px) {
+  html body #root {
+    padding: 0;
+  }
+  html body #root .container {
+    border-radius: 0%;
+    border: none;
+    background-color: inherit;
+  }
+}
 .timeIntervalControls {
   background-color: inherit;
+  border-radius: 50%;
 }
 .timeIntervalControls .period-of-time div * {
   padding: 0;
@@ -34,6 +65,14 @@ button:focus {
   text-align: left;
 }
 
+@media screen and (max-width: 600px) {
+  .timeIntervalControls div div button:first-child {
+    text-align: center;
+  }
+  .timeIntervalControls div div button:last-child {
+    text-align: center;
+  }
+}
 .timer .counterWithLabel {
   border: 3px solid black;
   border-radius: 20px;

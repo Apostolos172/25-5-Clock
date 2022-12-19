@@ -1,15 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect, useCallback } from "react";
-import "./App.css";
 import TimeIntervalControls from "./components/TimeIntervalControls";
 import Timer from "./components/Timer";
 import "./css/style.css";
 import { minToSec } from "./util.js";
 
-//let intervalOfTimeLeft;
-
 function App() {
 
+  // state
   const initialStateBreakLengthControl = 5;
   const [stateBreakLengthControl, setStateBreakLengthControl] = useState(
     initialStateBreakLengthControl
@@ -21,7 +19,6 @@ function App() {
 
   const initialTimerState = {
     label: "Session",
-    // value: "25:00",
     //value: minToSec(1),
     value: minToSec(25),
   };
@@ -29,25 +26,18 @@ function App() {
   const [startStopButtonPressedState, setStartStopButtonPressedState] =
     useState("Stop");
 
-  // const test = () => {
-  //   console.log("test");
-  //   setTimeout(test, 1000);
-  // };
-
   const updateState = useCallback(() => {
+    // update timerState
     setTimerState((timerState) => {
-      // console.log(timerState.value);
       let newValue = timerState.value - 1;
       if (newValue < 0 && timerState.label === "Session") {
         // τέλειωσε το session, ξεκίνα διάλλειμμα
-        //let breakLength = document.getElementById("break-length").innerHTML;
         let breakLength = stateBreakLengthControl;
-        console.log(document.getElementById("beep"));
+        //console.log(document.getElementById("beep"));
         document.getElementById("beep").play();
         return { label: "Break", value: minToSec(breakLength) };
       } else if (newValue < 0 && timerState.label === "Break") {
         // τέλειωσε το διάλλειμμα, ξεκίνα το session
-        //let sessionLength = document.getElementById("session-length").innerHTML;
         let sessionLength = stateSessionLengthControl;
         document.getElementById("beep").play();
         return { label: "Session", value: minToSec(sessionLength) };
@@ -69,22 +59,19 @@ function App() {
   const resetPressed = (event) => {
     //console.log(event.currentTarget);
     setTimerState(initialTimerState);
-    //document.getElementById("break-length").innerHTML = "5";
-    //document.getElementById("session-length").innerHTML = "25";
-    setStateBreakLengthControl(5);
-    setStateSessionLengthControl(25);
+    setStateBreakLengthControl(initialStateBreakLengthControl);
+    setStateSessionLengthControl(initialStateSessionLengthControl);
     let audio = document.getElementById("beep");
     //console.log(audio);
-    //audio.pause();
     audio.currentTime = 0;
-    //audio.stop();
+    audio.pause();
   };
 
   const startStopButtonPressed = (event) => {
-    console.log(event.currentTarget);
-    // αρχικά πρέπει να παίρνω την τιμή του timerState και να αρχίσω να μειώνω
+    //console.log(event.currentTarget);
     setStartStopButtonPressedState((previousState) => {
-      console.log(startStopButtonPressedState);
+      //console.log(startStopButtonPressedState);
+      //console.log(previousState);
       if (previousState === "Stop") {
         return "Start";
       }

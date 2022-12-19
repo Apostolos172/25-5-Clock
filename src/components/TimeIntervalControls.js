@@ -27,7 +27,6 @@ const TimeIntervalControls = (props) => {
   const increaseDecresePressed = (event) => {
     // console.log(event);
     // console.log(event.currentTarget);
-    // console.log(event.currentTarget);
     console.log(event.currentTarget.id);
     // to do
     // έχεις το id, με ένα switch αλλάζεις κατάλληλο state καταλλήλως και θα πάει να το αλλάξει

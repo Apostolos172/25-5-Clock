@@ -1,16 +1,29 @@
 html {
-  background-color: beige;
+  background-color: rgb(195, 177, 147);
   padding: 10px;
 
   body {
-    background-color: beige;
+    background-color: rgb(195, 177, 147);
+    text-align: center;
 
     #root {
+      padding: 50px;
       .container {
         background-color: beige;
         width: 80%;
         width: 500px;
         padding-top: 50px;
+        padding-bottom: 30px;
+        border: 13px double brown;
+        border-radius: 50%;
+
+        h1 {
+          padding-bottom: 20px;
+        }
+
+        .counterWithLabel {
+          width: fit-content;
+        }
       }
     }
   }
@@ -27,6 +40,33 @@ button {
 
 button:focus {
   outline: orange 5px auto;
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    body {
+      #root {
+        .container {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  html {
+    body {
+      #root {
+        padding: 0;
+        .container {
+          border-radius: 0%;
+          border: none;
+          background-color: inherit;
+        }
+      }
+    }
+  }
 }
 
 @import "./timeIntervalControls";

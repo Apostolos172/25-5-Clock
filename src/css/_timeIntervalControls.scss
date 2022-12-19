@@ -1,5 +1,6 @@
 .timeIntervalControls {
   background-color: inherit;
+  border-radius: 50%;
 
   .period-of-time {
     div.label {
@@ -28,6 +29,22 @@
 
       button:last-child {
         text-align: left;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .timeIntervalControls {
+    div {
+      div {
+        button:first-child {
+          text-align: center;
+        }
+
+        button:last-child {
+          text-align: center;
+        }
       }
     }
   }
