@@ -1,9 +1,11 @@
 html {
   background-color: rgb(195, 177, 147);
   padding: 10px;
+  background: url(./../assets/clock.jpg) no-repeat center center fixed;
+  background-size: cover;
 }
 html body {
-  background-color: rgb(195, 177, 147);
+  background-color: rgba(195, 177, 147, 0);
   text-align: center;
 }
 html body #root {
@@ -11,6 +13,7 @@ html body #root {
 }
 html body #root .container {
   background-color: beige;
+  background-color: rgba(233, 228, 201, 0.9);
   width: 80%;
   width: 500px;
   padding-top: 50px;
@@ -49,10 +52,10 @@ button:focus {
     border-radius: 0%;
     border: none;
     background-color: inherit;
+    background-color: rgba(233, 228, 201, 0.9);
   }
 }
 .timeIntervalControls {
-  background-color: inherit;
   border-radius: 50%;
 }
 .timeIntervalControls .period-of-time div * {
